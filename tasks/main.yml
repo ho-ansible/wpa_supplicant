@@ -1,1 +1,33 @@
 ---
+
+- name: wpa_supplicant | package
+  tags:
+  - package
+  package:
+    name: wpasupplicant
+  notify: restart wpa_supplicant
+
+- name: wpa_supplicant | generate WPA PSK
+  tags:
+  - config
+  - password
+  ansible.builtin.command: /bin/wpa_passphrase "{{ wifi_ssid }}" "{{ wifi_passwd }}"
+  changed_when: false
+  register: wpa_psk
+
+- name: wpa_supplicant | config
+  tags:
+  - config
+  template:
+    src: wpa_supplicant.conf.j2
+    dest: "{{ wpa_supplicant_conf }}"
+    mode: "0640"
+  notify: restart wpa_supplicant
+
+- name: wpa_supplicant | service
+  tags:
+  - service
+  service:
+    name: "wpa_supplicant@{{ wifi_iface }}"
+    state: started
+    enabled: yes

@@ -1,1 +1,2 @@
 ---
+wpa_supplicant_conf: "/etc/wpa_supplicant/wpa_supplicant-{{ wifi_iface }}.conf"

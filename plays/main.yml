@@ -1,10 +1,11 @@
 #! /usr/bin/env ansible-playbook
-# Configure template role
-# Replace 'all' with your own inventory group
+# Configure wpa_supplicant role
+# Replace 'wifi' with your own inventory group
 ---
-- name: template | template role
-  hosts: all
+- name: wpa_supplicant | apply role
+  hosts: wifi
   roles:
-  - role: template
+  - role: wpa_supplicant
     tags:
-    - template
+    - wpa_supplicant
+    - wifi

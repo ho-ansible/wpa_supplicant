@@ -1,1 +1,7 @@
 ---
+- name: restart wpa_supplicant
+  tags:
+  - service
+  service:
+    name: "wpa_supplicant@{{ wifi_iface }}"
+    state: restarted

@@ -1,1 +1,4 @@
 ---
+wifi_iface: wlan0
+wifi_ssid: MY_SSID
+wifi_passwd: MY_PASSWD

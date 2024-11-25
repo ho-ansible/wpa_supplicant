@@ -1,1 +1,26 @@
 ---
+
+- name: wpa_supplicant | service
+  tags:
+  - service
+  service:
+    name: "wpa_supplicant@{{ wifi_iface }}"
+    state: stopped
+    enabled: no
+
+- name: wpa_supplicant | remove config
+  tags:
+  - config
+  file:
+    path: "{{ item }}"
+    state: absent
+  loop:
+  - "{{ wpa_supplicant_conf }}"
+
+- name: wpa_supplicant | uninstall package
+  tags:
+  - package
+  package:
+    name: wpasupplicant
+    state: absent
+
